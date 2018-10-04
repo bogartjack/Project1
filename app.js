@@ -25,9 +25,8 @@ class Block {
 		$('#game').append(this.$block);
 	}
 	setState(){
-		console.log(this.xIndex);
-		console.log(this.yIndex);
-		this.state = true;
+		if (this.state ===false) this.state = true;
+		else this.state = false;
 	}
 	changeColorBasedOnState(){
 		if(this.state === true) this.$block.css('background-color', '#000000');

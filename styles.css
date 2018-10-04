@@ -1,0 +1,17 @@
+html, body {height: 100%; width: 100%}
+
+div {
+	float:left;
+	display: inline-block;
+	
+}
+
+.someBlock {
+	float: left;
+	border-style: solid;
+	display: inline-block;
+}
+
+#game {
+	
+}

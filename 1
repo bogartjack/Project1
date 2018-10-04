@@ -17,21 +17,17 @@ class Block {
 			.css('height', BLOCKHEIGHT+'px')
 			.css('width', BLOCKHEIGHT+'px')
 			.css('border', '1px solid red')
-			.data('xIndex', this.xIndex)
-			.data('yIndex', this.yIndex);
 //			.text(this.xIndex + ',' + this.yIndex);
 	}
 	addToPage(){
 		$('#game').append(this.$block);
 	}
 	setState(){
-		console.log(this.xIndex);
-		console.log(this.yIndex);
 		this.state = true;
 	}
 	changeColorBasedOnState(){
 		if(this.state === true) this.$block.css('background-color', '#ffff00');
-		else this.$block.css('background', '#F0F0F0');
+		else this.$block.css('background-color', '#F0F0F0');
 	}
 }
 
@@ -49,10 +45,14 @@ const board = {
 		}
 	},
 	changeState (){
-
-		for (let i =0; i<BLOCKSTALL;i++){
-			for (let j =0; j<BLOCKSWIDE; j++){
-				
+		while (true){
+		console.log('dood');		
+		for (let i =0; i<this.allBlocks.length;i++){
+			for (let j =0; j<this.allBlocks[i].length; j++){
+				if (this.allBlocks[i][j].state === true){
+					allBlocks[i][j].changeColorBasedOnState();
+				}
+			}
 			}
 		}
 	}
@@ -61,10 +61,7 @@ const board = {
 board.addBlocksToBoard();
 board.changeState();
 
-$('.someBlock').on('click', (e) => {
-	console.log($(e.currentTarget).attr('id'));
-	console.log($(e.currentTarget).data('xIndex'));
-	board.allBlocks[$(e.currentTarget).data('xIndex')][$(e.currentTarget).data('yIndex')].setState();
-	board.allBlocks[$(e.currentTarget).data('xIndex')][$(e.currentTarget).data('yIndex')].changeColorBasedOnState();
-
+$('someBlock').on('click', (e) => {
+	$(e.target).setState();
+	$(e.target).changeColorBasedOnState();
 });

@@ -1,8 +1,9 @@
-const WIDTH = window.innerWidth;
-const HEIGHT = window.innerHeight;
-const BLOCKHEIGHT = 5;
-const BLOCKSWIDE = WIDTH/(BLOCKHEIGHT);
-const BLOCKSTALL = HEIGHT/(BLOCKHEIGHT);
+const WIDTH = $(window).width();
+const HEIGHT = $(window).height();
+const BLOCKHEIGHT = 20;
+const BLOCKSWIDE = WIDTH/(BLOCKHEIGHT+2)-1;
+const BLOCKSTALL = HEIGHT/(BLOCKHEIGHT+2)-1;
+let evolving = false;
 
 class Block {
 	constructor(x,y){
@@ -24,12 +25,12 @@ class Block {
 	addToPage(){
 		$('#game').append(this.$block);
 	}
-	setState(){
-		if (this.state ===false) this.state = true;
+	toggleState(){
+		if (!this.state) this.state = true;
 		else this.state = false;
 	}
 	changeColorBasedOnState(){
-		if(this.state === true) this.$block.css('background-color', '#000000');
+		if(this.state) this.$block.css('background-color', '#000000');
 		else this.$block.css('background', '#F0F0F0');
 	}
 }
@@ -47,23 +48,72 @@ const board = {
 			this.allBlocks.push(row);
 		}
 	},
-	changeState (){
-
-		for (let i =0; i<BLOCKSTALL;i++){
-			for (let j =0; j<BLOCKSWIDE; j++){
-				
+	updateBoard (){
+		for (let i=0; i<BLOCKSTALL; i++){
+			for (let j=0; j<BLOCKSWIDE; j++){
+				this.allBlocks[i][j].changeColorBasedOnState();
 			}
 		}
-	}
+	},
+	evolve (){
+		if (evolving){
+			for (let i =0; i<BLOCKSTALL;i++){
+				for (let j =0; j<BLOCKSWIDE; j++){
+					let neighbors = 0;					
+					if((i>0) && (j>0) && this.allBlocks[i-1][j-1].state){
+						neighbors++;}
+					if((i>0) && this.allBlocks[i-1][j].state){
+						neighbors++;}
+					if((i>0) && j < BLOCKSWIDE-1 && this.allBlocks[i-1][j+1].state){
+						neighbors++;}
+					if((j>0) && this.allBlocks[i][j-1].state){
+						neighbors++;}
+					if((j<BLOCKSWIDE-1) && this.allBlocks[i][j+1].state){
+						neighbors++;}
+					if((j>0) && i<(BLOCKSTALL-1) && this.allBlocks[i+1][j-1].state){
+						neighbors++;}
+					if((i<BLOCKSTALL-1) && this.allBlocks[i+1][j].state){
+						neighbors++;}
+					if((j<BLOCKSWIDE-1) && (i<BLOCKSTALL-1) && this.allBlocks[i+1][j+1].state){
+						neighbors++;}
+					if(neighbors<2 && this.allBlocks[i][j].state){
+						this.allBlocks[i][j].state = false;}
+					if(neighbors===2 && this.allBlocks[i][j].state) {
+						this.allBlocks[i][j].state = true;}
+					if(neighbors===3 && this.allBlocks[i][j].state) {
+						this.allBlocks[i][j].state = true;}
+					if(neighbors>3 && this.allBlocks[i][j].state){
+						this.allBlocks[i][j].state = false;}
+					if(neighbors===3 && !this.allBlocks[i][j].state){
+						this.allBlocks[i][j].state = true;}
+					}
+				}	
+			for (let i=0; i<BLOCKSTALL; i++){
+				for (let j=0; j<BLOCKSWIDE; j++){
+					this.allBlocks[i][j].changeColorBasedOnState();
+				}
+			}
+		}
+	}	
 };
 
 board.addBlocksToBoard();
-board.changeState();
 
-$('.someBlock').on('click', (e) => {
-	console.log($(e.currentTarget).attr('id'));
-	console.log($(e.currentTarget).data('xIndex'));
-	board.allBlocks[$(e.currentTarget).data('yIndex')][$(e.currentTarget).data('xIndex')].setState();
-	board.allBlocks[$(e.currentTarget).data('yIndex')][$(e.currentTarget).data('xIndex')].changeColorBasedOnState();
+$('.someBlock').mouseover((e) => {
+	if(e.buttons == 1){
+		console.log($(e.currentTarget).attr('id'));
+		console.log($(e.currentTarget).data('xIndex'));
+		board.allBlocks[$(e.currentTarget).data('yIndex')][$(e.currentTarget).data('xIndex')].toggleState();
+		board.allBlocks[$(e.currentTarget).data('yIndex')][$(e.currentTarget).data('xIndex')].changeColorBasedOnState();
+	}
+});
 
+$('body').keydown( (e) => {
+	if (evolving === false) {evolving = true;}
+	else {evolving = false;}
+
+	if (e.keyCode === 32){
+		
+		board.evolve();
+	}
 });

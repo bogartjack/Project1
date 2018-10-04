@@ -1,8 +1,8 @@
 const WIDTH = window.innerWidth;
 const HEIGHT = window.innerHeight;
 const BLOCKHEIGHT = 5;
-const BLOCKSWIDE = WIDTH/(BLOCKHEIGHT+2);
-const BLOCKSTALL = HEIGHT/(BLOCKHEIGHT+2);
+const BLOCKSWIDE = WIDTH/(BLOCKHEIGHT);
+const BLOCKSTALL = HEIGHT/(BLOCKHEIGHT);
 
 class Block {
 	constructor(x,y){
@@ -30,7 +30,7 @@ class Block {
 		this.state = true;
 	}
 	changeColorBasedOnState(){
-		if(this.state === true) this.$block.css('background-color', '#ffff00');
+		if(this.state === true) this.$block.css('background-color', '#000000');
 		else this.$block.css('background', '#F0F0F0');
 	}
 }
@@ -64,7 +64,7 @@ board.changeState();
 $('.someBlock').on('click', (e) => {
 	console.log($(e.currentTarget).attr('id'));
 	console.log($(e.currentTarget).data('xIndex'));
-	board.allBlocks[$(e.currentTarget).data('xIndex')][$(e.currentTarget).data('yIndex')].setState();
-	board.allBlocks[$(e.currentTarget).data('xIndex')][$(e.currentTarget).data('yIndex')].changeColorBasedOnState();
+	board.allBlocks[$(e.currentTarget).data('yIndex')][$(e.currentTarget).data('xIndex')].setState();
+	board.allBlocks[$(e.currentTarget).data('yIndex')][$(e.currentTarget).data('xIndex')].changeColorBasedOnState();
 
 });

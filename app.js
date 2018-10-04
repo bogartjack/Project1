@@ -12,6 +12,7 @@ class Block {
 		this.yIndex = y;
 		this.xLoc = this.xIndex*BLOCKHEIGHT;
 		this.yLoc = this.yIndex*BLOCKHEIGHT;
+		this.neighbors = 0;
 		this.$block = $('<div></div>').attr('id','block'+this.xIndex+','+this.yIndex)
 			.attr('class', 'someBlock')
 			.css('background', '#F0F0F0')
@@ -59,38 +60,42 @@ const board = {
 		if (evolving){
 			for (let i =0; i<BLOCKSTALL;i++){
 				for (let j =0; j<BLOCKSWIDE; j++){
-					let neighbors = 0;					
 					if((i>0) && (j>0) && this.allBlocks[i-1][j-1].state){
-						neighbors++;}
+						this.allBlocks[i][j].neighbors++;}	
 					if((i>0) && this.allBlocks[i-1][j].state){
-						neighbors++;}
-					if((i>0) && j < BLOCKSWIDE-1 && this.allBlocks[i-1][j+1].state){
-						neighbors++;}
+						this.allBlocks[i][j].neighbors++;}	
+					if((i>0) && (j < BLOCKSWIDE-1) && this.allBlocks[i-1][j+1].state){
+						this.allBlocks[i][j].neighbors++;}	
 					if((j>0) && this.allBlocks[i][j-1].state){
-						neighbors++;}
+						this.allBlocks[i][j].neighbors++;}	
 					if((j<BLOCKSWIDE-1) && this.allBlocks[i][j+1].state){
-						neighbors++;}
-					if((j>0) && i<(BLOCKSTALL-1) && this.allBlocks[i+1][j-1].state){
-						neighbors++;}
+						this.allBlocks[i][j].neighbors++;}	
+					if((j>0) && (i<BLOCKSTALL-1) && this.allBlocks[i+1][j-1].state){
+						this.allBlocks[i][j].neighbors++;}	
 					if((i<BLOCKSTALL-1) && this.allBlocks[i+1][j].state){
-						neighbors++;}
-					if((j<BLOCKSWIDE-1) && (i<BLOCKSTALL-1) && this.allBlocks[i+1][j+1].state){
-						neighbors++;}
-					if(neighbors<2 && this.allBlocks[i][j].state){
+						this.allBlocks[i][j].neighbors++;}	
+					if((j<BLOCKSWIDE-1) && (i<BLOCKSTALL-1) && this.allBlocks[i+1][j+1].state){							this.allBlocks[i][j].neighbors++;}	
+				}
+			}	
+			for (let i=0; i<BLOCKSTALL; i++){
+				for (let j=0; j<BLOCKSWIDE; j++){
+					
+					if(this.allBlocks[i][j].neighbors < 2 && this.allBlocks[i][j].state){
 						this.allBlocks[i][j].state = false;}
-					if(neighbors===2 && this.allBlocks[i][j].state) {
+					if(this.allBlocks[i][j].neighbors===2 && this.allBlocks[i][j].state) {
 						this.allBlocks[i][j].state = true;}
-					if(neighbors===3 && this.allBlocks[i][j].state) {
+					if(this.allBlocks[i][j].neighbors===3 && this.allBlocks[i][j].state) {
 						this.allBlocks[i][j].state = true;}
-					if(neighbors>3 && this.allBlocks[i][j].state){
+					if(this.allBlocks[i][j].neighbors>3 && this.allBlocks[i][j].state){
 						this.allBlocks[i][j].state = false;}
-					if(neighbors===3 && !this.allBlocks[i][j].state){
+					if(this.allBlocks[i][j].neighbors===3 && !this.allBlocks[i][j].state){
 						this.allBlocks[i][j].state = true;}
-					}
-				}	
+				}
+			}
 			for (let i=0; i<BLOCKSTALL; i++){
 				for (let j=0; j<BLOCKSWIDE; j++){
 					this.allBlocks[i][j].changeColorBasedOnState();
+					this.allBlocks[i][j].neighbors = 0;
 				}
 			}
 		}

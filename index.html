@@ -1,15 +1,28 @@
-<!DOCTYPE html
+<!DOCTYPE html>
 <html>
 	<head>
-		<title>SoundShot</title>
+		<title>Conway's Game Of Doohickey's</title>
 		<meta charset ='UTF-8'>
 		<link rel ='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css'>
+		<link href="https://fonts.googleapis.com/css?family=Wire+One" rel="stylesheet">
 		<link rel ='stylesheet' type='text/css' href='styles.css'>
 	</head>
-	<body width ='100%' height ='100%'>
-		<div id ='game' width ='100%' height='100%'></div>	
+	<body>
+		<div id ='overlay'><div id='instructions'>Drag your mouse across the grid to populate squares<br/><br/>
+					Populated squares with less than two neighbors or more than three neighbors will die<br><br/>
+					Populated squares with two or three neighbors stay alive <br><br/>
+					Unpopulated squares with exactly three neighbors will be populated <br><br/>
+					Press the spacebar to toggle evolving <br><br/>
+				<button id ='play'>Press to Play</button>
+				
+
+		</div></div>
+		<div height = '100%' position = 'fixed'>
+		<div id ='stats'><div id ='iterations'></div><div id ='liveCells'></div></div>
+		<div id ='game' width ='100%' height='100%'></div>
+		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="app.js"></script>
 
-	</body>
+		</body>
 </html>

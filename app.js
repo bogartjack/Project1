@@ -1,8 +1,8 @@
 const WIDTH = $('#game').width();
 const HEIGHT = $('#game').height();
-const BLOCKHEIGHT = 8;
-const BLOCKSWIDE = WIDTH/(BLOCKHEIGHT+2)-1;
-const BLOCKSTALL = HEIGHT/(BLOCKHEIGHT+2)-1;
+const BLOCKHEIGHT = 20;
+const BLOCKSWIDE = (WIDTH-WIDTH%BLOCKHEIGHT)/(BLOCKHEIGHT+2)-1;
+const BLOCKSTALL = (HEIGHT-HEIGHT%BLOCKHEIGHT)/(BLOCKHEIGHT+2)-1;
 let evolving = false;
 let liveCells = 0;
 let iterations = 0;
@@ -25,8 +25,8 @@ class Block {
 			.css('width', BLOCKHEIGHT+'px')
 			.css('border', '1px solid black')
 			.data('xIndex', this.xIndex)
-			.data('yIndex', this.yIndex);
-//			.text(this.xIndex + ',' + this.yIndex);
+			.data('yIndex', this.yIndex)
+			.text(this.xIndex + ',' + this.yIndex);
 	}
 	addToPage(){
 		$('#game').append(this.$block);
@@ -121,8 +121,6 @@ const board = {
 	}	
 };
 
-board.addBlocksToBoard();
-
 const overlay = () => {
 	$('#overlay').css('display', 'block');
 	$('#play').on('click', () => {
@@ -140,24 +138,27 @@ $(document).ready( () => {
 	board.addBlocksToBoard();
 	$('#stats').prepend($liveCells);
 	$('#stats').prepend($iterations);
+	drawOnBoard();
 	overlay();
 	updateStats();
 });
-
-$('.someBlock').mouseover((e) => {
-	if(e.buttons == 1){
-		console.log($(e.currentTarget).attr('id'));
-		console.log($(e.currentTarget).data('xIndex'));
-		board.allBlocks[$(e.currentTarget).data('yIndex')][$(e.currentTarget).data('xIndex')].toggleState();
-		board.allBlocks[$(e.currentTarget).data('yIndex')][$(e.currentTarget).data('xIndex')].changeColorBasedOnState();
-	}
-});
+const drawOnBoard = () => {
+	$('.someBlock').mouseover((e) => {
+		console.log('doohick');
+		if(e.buttons == 1){
+			console.log($(e.currentTarget).attr('id'));
+	//		console.log($(e.currentTarget).data('xIndex'))
+			board.allBlocks[$(e.currentTarget).data('yIndex')][$(e.currentTarget).data('xIndex')].toggleState();
+			board.allBlocks[$(e.currentTarget).data('yIndex')][$(e.currentTarget).data('xIndex')].changeColorBasedOnState();
+		}
+	});
+}
 
 $('body').keydown( (e) => {
-	if (evolving === false) {evolving = true;}
+	if (!evolving) {evolving = true;}
 	else {evolving = false;}
-
 	if (e.keyCode === 32){	
+		e.preventDefault();
 		board.evolve();
 		updateStats();
 	}

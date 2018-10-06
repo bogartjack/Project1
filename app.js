@@ -67,7 +67,6 @@ const board = {
 		}
 	},
 	evolve (){
-		setTimeout(() => {
 			for (let i =0; i<BLOCKSTALL;i++){
 				for (let j =0; j<BLOCKSWIDE; j++){
 					if((i>0) && (j>0) && this.allBlocks[i-1][j-1].state){
@@ -122,17 +121,27 @@ const board = {
 				}
 			}
 		iterations++;
-		}, 250);
 	}	
 };
-const startTheRave = () => {
-	let temp = 0;
-	let up = true;
-	window.setInterval( () => {	
+
+raveDJ = null;
+
+const isItARave = (keepTrackOfRave) => {
+	if(keepTrackOfRave){
+		raveDJ = setInterval( raving, 500);
+	}
+	else
+		clearInterval(raveDJ);
+}
+			
+const raving = () => {	
+		let temp = 0;
+		let up = true; 
 		$('#game').css('border-color', '#'+Math.floor(Math.random()*16777215).toString(16));
 		$('.someBlock').css('border-color', '#'+Math.floor(Math.random()*1677215).toString(16));
-		$('#content').css('border-color', '#'+Math.floor(Math.random()*16777215).toString(16));
+		$('#content').css('background-color', '#'+Math.floor(Math.random()*16777215).toString(16));
 		$('#stats').css('color', '#'+Math.floor(Math.random()*16777215).toString(16));
+		$('#stats').css('background-color', '#'+Math.floor(Math.random()*16777215).soTring(16));
 		switch (temp){
 			case 0:
 				$('#game').css('border-thickness', '2px');
@@ -203,8 +212,6 @@ const startTheRave = () => {
 				}
 				break;
 		};
-
-	}, 250);
 }
 
 const overlay = () => {
@@ -226,7 +233,6 @@ $(document).ready( () => {
 	$('#stats').prepend($iterations);
 	drawOnBoard();
 	overlay();
-	startTheRave();
 	updateStats();
 });
 const drawOnBoard = () => {
@@ -241,6 +247,7 @@ const drawOnBoard = () => {
 	});
 }
 
+let keepTrack = true;
 $('body').keydown( (e) => {
 	if (e.keyCode === 32){	
 		e.preventDefault();
@@ -249,5 +256,10 @@ $('body').keydown( (e) => {
 	}
 	else if(e.keyCode === 77){
 		overlay();
+	}
+	else if(e.keyCode === 52){
+		isItARave(keepTrack);
+		if (keepTrack) keepTrack = false;
+		else keepTrack = true;
 	}
 });

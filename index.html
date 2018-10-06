@@ -8,17 +8,18 @@
 		<link rel ='stylesheet' type='text/css' href='styles.css'>
 	</head>
 	<body>
-		<div id ='overlay'><div id='instructions'>Drag your mouse across the grid to populate squares<br/><br/>
+		<div id ='overlay'><div id='instructions'>Click & Drag your mouse across the grid to populate squares<br/><br/>
 					Populated squares with less than two neighbors or more than three neighbors will die<br><br/>
 					Populated squares with two or three neighbors stay alive <br><br/>
 					Unpopulated squares with exactly three neighbors will be populated <br><br/>
-					Press the spacebar to toggle evolving <br><br/>
+					Press the space bar to evolve once, hold to continue evolving<br><br/>
+				Press M to bring up this menu again!
 				<button id ='play'>Press to Play</button>
 				
 
 		</div></div>
 		<div id ='stats'><div id ='iterations'></div><div id ='liveCells'></div></div>
-		<div id ='game'></div>
+		<div id='content'><div id ='game'></div></div>
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="app.js"></script>

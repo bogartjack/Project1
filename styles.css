@@ -4,7 +4,6 @@ html, body {height: 100%; min-height: 100%; width: 100%; font-family: 'Wire One'
 	float: left;
 	border-style: solid;
 	display: inline-block;
-	z-index: 5;
 	user-select: none;
 }
 #content {
@@ -29,6 +28,7 @@ html, body {height: 100%; min-height: 100%; width: 100%; font-family: 'Wire One'
 	display: none;
 	width: 100%;
 	height: 100%;
+	color: #ff00f2;
 	background-color: rgba(0,0,0,0.92);
 	z-index: 100;
 	cursor: pointer;
@@ -56,14 +56,110 @@ html, body {height: 100%; min-height: 100%; width: 100%; font-family: 'Wire One'
 }
 
 #instructions {
+	display: block;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	margin: auto;
-	font-size: 32px;
-	color: #ff00f2;
+	font-size: 34px;
+	color: #FF00F2;
 	transform: translate(-50%,-50%);
 	-ms-transform: translate(-50%, -50%);
+}
+
+#menu {
+	background-color: #ff00f2;
+	color: white;
+	display: block;
+	font-size: 24px;
+	height: 4%;
+}
+
+.navs {
+	height: 100%;
+	width: 33%;
+	text-align: center;
+	display: inline-block; 
+	float: left;
+}
+
+.navs:link {
+	color: white;
+	text-decoration: none;
+}
+
+.navs:visited {
+	color: white;
+	text-decoration: none;
+}
+
+.navs:hover {
+	font-size: 26px;
+	text-decoration: underline overline;
+}
+
+.navs:active{
+	text-decoration: underline overline;
+}
+
+#information {
+	text-align: center;
+	position: absolute;
+	display: none;
+	font-size: 30px;
+	color: #ff00f2;
+}
+
+#information a{
+	display: block;
+	text-decoration: none;
+	color: white;
+}
+
+#information a:hover{
+	text-decoration: underline overline;
+	font-size: 36px;
+}
+
+#sprites {
+	display: none;
+	overflow: visible;
+	width: 100%;
+	height: 100%;
+}
+
+#sprite-container{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+#sprite-container h1{
+	font-size: 45px;
+	text-decoration: underline;
+}
+
+.sprite-classification {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+.sprite {
+	cursor: move;
+	border: 3px solid #ff00f2;
+	border-radius: 4px;
+	float:left; 
+	width: 100px;
+	margin: 2px;
+}
+
+.sprite-image {
+	user-select: none;
+	user-drag: none;
+	width: 100px;
 }
 
 #play {
@@ -76,6 +172,6 @@ html, body {height: 100%; min-height: 100%; width: 100%; font-family: 'Wire One'
 #play:hover{
 	background: #ff00f2;
 	border: 2px solid white;
-	text:white;
+	color:white;
 	
 }

@@ -8,18 +8,100 @@
 		<link rel ='stylesheet' type='text/css' href='styles.css'>
 	</head>
 	<body>
-		<div id ='overlay'><div id='instructions'>
-		Click & Drag your mouse across the grid to populate squares<br/><br/>
-		Populated squares with less than two neighbors or more than three neighbors will die<br><br/>
-		Populated squares with two or three neighbors stay alive <br><br/>
-		Unpopulated squares with exactly three neighbors will be populated <br><br/>
-		Press the space bar to evolve once, hold to continue evolving<br><br/>
-		Press M to bring up this menu again!<br></br>
-		Press $ to start/stop Raving!<br></br>
-				<button id ='play'>Press to Play</button>
-				
+		<div id ='overlay'>
+		<nav id='menu'>	
+			<a id ='instruction-link' class ='navs' href ='#instructions'>Instructions</a>
+			<a id ='info-link' class ='navs' href ='#information'>Information</a>
+			<a id ='sprites-link' class ='navs' href ='#sprites'>Sprites</a>
+		</nav>
+		<div id='instructions'><br/>
+			Click & Drag your mouse across the grid to populate squares<br/><br/>
+			Populated squares with less than two neighbors or more than three neighbors will die<br><br/>
+			Populated squares with two or three neighbors stay alive <br/>
+			Unpopulated squares with exactly three neighbors will be populated <br><br/>
+			Press the space bar to evolve once, hold to continue evolving<br/>
+			Press M to bring up this menu again!</br>
+			Press $ to start/stop Raving!</br>
+			<button id ='play'>Press to Play</button>				
+		</div>
+		<div id='information'><br/>
+			Conway's Game of Life is a Cellular Automoton. <br/>
+			Cellular Automota, or CA's, are often studied in mathematics and Computer Science<br/><br/>
+			They are defined by a grid of cells all in finite states, such as on or off.<br/>
+			An initial state is selected and then each generation evolves based on a certain set of rules.<br/><br/>
+			Conway's Game Of Life was the first CA to gain popularity outside of Academia. <br/><br/>
+			This popularity mainly comes from the surprising ways patterns can evolve from simple rules. It's even Turing Complete! <br/>
+			To read more about the fascinating world of CA's, here are a couple interesting resources:<br/>
+			<a href ='http://www.conwaylife.com/'>Conway's Game Of Life Forum</a>
+			<a href ='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'>Wikipedia</a>
+			
+			<iframe width="300" height="150" src="https://www.youtube.com/embed/C2vgICfQawE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+		</div>
+		<div id='sprites'>
+			<h1 style ='display:inline'>Check out these sprites! See if you can make some!</h1>
+			<div id='sprite-container'>
+				<div class ='sprite-classification' id='glider-container'><h1>Spaceships:</h1>
+				<div class ='sprite' id='glider'>
+					<img class ='sprite-image' src='http://conwaylife.com/w/images/8/81/Glider.gif' alt='glider'></img>
+					<h2>Glider</h2>
+				</div>
+				<div class ='sprite' id='lwss'>
+					<img class ='sprite-image' src='http://conwaylife.com/w/images/2/21/Lwss.gif' alt='LWSS'></img>
+					<h2>LightWeight Space Ship</h2>
+				</div>
+				<div class ='sprite' id='loafer'>
+					<img class ='sprite-image' src='http://conwaylife.com/w/images/8/80/Loafer.gif' alt='loafer'></img>
+					<h2>Loafer</h2>
+				</div>
+				</div>
+				<div class ='sprite-classification' id='oscillator-container'><h1>Oscillators:</h1>
+				<div class ='sprite' id='blinker'>
+					<img class ='sprite-image' src='http://conwaylife.com/w/images/b/b9/Blinker.gif' alt='blinker'></img>
+					<h2>Blinker</h2>
+				</div>
+				<div class ='sprite' id='pulsar'>
+					<img class ='sprite-image' src='http://conwaylife.com/w/images/e/ef/Pulsar.gif' alt='Pulsar'></img>
+					<h2>Pulsar</h2>
+				</div>
+				<div class ='sprite' id='octagon'>
+					<img class ='sprite-image' src='http://conwaylife.com/w/images/5/5f/Octagon2.gif' alt='Octagon'></img>
+					<h2>Octagon</h2>
+				</div>
+				</div>
+				<div class ='sprite-classification' id='stills-container'><h1>Still Lifes:</h1>
+				<div class ='sprite' id='boat'>
+					<img class ='sprite-image' src='http://conwaylife.com/w/images/1/1e/Boat.png' alt='Boat'></img>
+					<h2>Boat</h2>
+				</div>
+				<div class ='sprite' id='Block'>
+					<img class ='sprite-image' src='http://conwaylife.com/w/images/4/48/Block.png' alt='Block'></img>
+					<h2>Block</h2>
+				</div>
+				<div class ='sprite' id='Beehive'>
+					<img class ='sprite-image' src='http://conwaylife.com/w/images/3/3c/Beehive.png' alt='Beehive'></img>
+					<h2>Beehive</h2>
+				</div>
+				</div>
+				<div class ='sprite-classification' id='methuselah-container'><h1>Methuselahs:</h1>
+				<div class ='sprite' id='r-pentomino'>
+					<img class ='sprite-image' src='http://conwaylife.com/w/images/6/6e/Rpentomino.png' alt='R-Pentomino'></img>
+					<h2>R-pentomino</h2>
+				</div>
+				<div class ='sprite' id='c-heptomino'>
+					<img class ='sprite-image' src='http://conwaylife.com/w/images/6/68/Cheptomino.png' alt='c-heptomino'></img>
+					<h2>C-Heptomino</h2>
+				</div>
+				<div class ='sprite' id='acorn'>
+					<img class ='sprite-image' src='http://conwaylife.com/w/images/c/cd/Acorn.png' alt='Acorn'></img>
+					<h2>Acorn</h2>
+				</div>
+				</div>
+			</div>
 
-		</div></div>
+
+			</div>	
+		</div>
+		</div>
 		<div id ='stats'><div id ='iterations'></div><div id ='liveCells'></div></div>
 		<div id='content'><div id ='game'></div></div>
 	
